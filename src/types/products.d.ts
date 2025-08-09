@@ -1,16 +1,17 @@
+export interface ImageProps {
+    uid: string;
+    src: string;
+    alt: string;
+}
 
-
+export type productImagesProps = ImageProps | Array<ImageProps>;
 export interface productsProps {
     uid: string;
     name: string;
     link: string;
     description: string;
     price: number;
-    image: productsImagesProps | Array<productsImagesProps>;
+    image: productImagesProps;
+    maxStock?: number;
 }
 
-export interface productsImagesProps {
-    uid: string;
-    src: string;
-    alt: string;
-}

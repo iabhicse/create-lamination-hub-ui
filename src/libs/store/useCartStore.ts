@@ -1,24 +1,25 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { productImagesProps } from "@/types/products";
 import type { StateStorage } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 // SSR-safe fallback storage
 const safeStorage: StateStorage = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getItem: (_key: string): string | null => null,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setItem: (_key: string, _value: string): void => {},
+  setItem: (_key: string, _value: string): void => { },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  removeItem: (_key: string): void => {},
+  removeItem: (_key: string): void => { },
 };
 
 export type CartItem = {
-  id: string;
+  uid: string;
   name: string;
   price: number;
   qty: number;
   link: string;
-  image: string;
+  image: productImagesProps;
   maxStock?: number;
 };
 
@@ -57,7 +58,7 @@ export const useCartStore = create<CartState>()(
 
       addItem: (item) => {
         const { items } = get();
-        const exists = items.find((i) => i.id === item.id);
+        const exists = items.find((i) => i.uid === item.uid);
 
         if (exists) {
           if (exists.maxStock && exists.qty >= exists.maxStock) {
@@ -66,7 +67,7 @@ export const useCartStore = create<CartState>()(
           }
           set({
             items: items.map((i) =>
-              i.id === item.id ? { ...i, qty: i.qty + 1 } : i
+              i.uid === item.uid ? { ...i, qty: i.qty + 1 } : i
             ),
             error: undefined,
           });
@@ -80,18 +81,18 @@ export const useCartStore = create<CartState>()(
 
       removeItem: (id) =>
         set((state) => ({
-          items: state.items.filter((i) => i.id !== id),
+          items: state.items.filter((i) => i.uid !== id),
         })),
 
       increaseQty: (id) => {
         const { items } = get();
-        const target = items.find((i) => i.id === id);
+        const target = items.find((i) => i.uid === id);
         if (target && target.maxStock && target.qty >= target.maxStock) {
           set({ error: `Max stock (${target.maxStock}) reached.` });
           return;
         }
         set({
-          items: items.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i)),
+          items: items.map((i) => (i.uid === id ? { ...i, qty: i.qty + 1 } : i)),
           error: undefined,
         });
       },
@@ -100,7 +101,7 @@ export const useCartStore = create<CartState>()(
         set((state) => ({
           items: state.items
             .map((i) =>
-              i.id === id ? { ...i, qty: Math.max(i.qty - 1, 0) } : i
+              i.uid === id ? { ...i, qty: Math.max(i.qty - 1, 0) } : i
             )
             .filter((i) => i.qty > 0),
         })),

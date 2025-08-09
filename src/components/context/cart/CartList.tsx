@@ -3,17 +3,33 @@ import React from "react";
 import { useCartStore } from "@/libs/store/useCartStore";
 import { Button } from "@/components/ui/shadcn/button";
 import { currencySymbol } from "@/libs/configs/config.data";
+import ImageComponent from "@/components/ui/helper/Image";
 
 const CartList = () => {
   const { items, increaseQty, decreaseQty, removeItem } = useCartStore();
+  const imageArray =
+    items[0].image && Array.isArray(items[0].image)
+      ? items[0].image
+      : [items[0].image];
+
   return (
     <>
       <ul className="space-y-4">
         {items.map((i) => (
           <li
-            key={i.id}
+            key={i.name}
             className="flex items-center justify-between rounded-lg border p-4 bg-card"
           >
+            {imageArray.length > 0 && (
+              <div className="flex items-center justify-center">
+                <ImageComponent
+                  width={128}
+                  height={128}
+                  src={imageArray[0].src}
+                  alt={imageArray[0].alt}
+                />
+              </div>
+            )}
             <div>
               <p className="font-medium">{i.name}</p>
               <p className="text-sm text-muted-foreground">
@@ -25,7 +41,7 @@ const CartList = () => {
             <div className="flex items-center gap-2">
               <Button
                 size="sm"
-                onClick={() => decreaseQty(i.id)}
+                onClick={() => decreaseQty(i.uid)}
                 variant={"gradient"}
               >
                 -
@@ -33,14 +49,14 @@ const CartList = () => {
               <span className="w-6 text-center">{i.qty}</span>
               <Button
                 size="sm"
-                onClick={() => increaseQty(i.id)}
+                onClick={() => increaseQty(i.uid)}
                 variant={"gradient"}
               >
                 +
               </Button>
               <Button
                 size="sm"
-                onClick={() => removeItem(i.id)}
+                onClick={() => removeItem(i.uid)}
                 variant={"gradient"}
               >
                 removeItem

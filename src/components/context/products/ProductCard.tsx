@@ -9,7 +9,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ products }: ProductCardProps) => {
-  const { image, link, name, description, price } = products;
+  const { uid, image, link, name, description, price } = products;
   const imageArray = Array.isArray(image) ? image : [image];
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
@@ -26,8 +26,8 @@ const ProductCard = ({ products }: ProductCardProps) => {
           </span>
           <AddtoCartButton
             item={{
-              id: name,
-              image: imageArray[0].src,
+              uid: uid,
+              image: imageArray[0],
               link: link,
               name: name,
               price: Number(price),
