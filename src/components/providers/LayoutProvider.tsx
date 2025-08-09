@@ -1,7 +1,7 @@
 "use client";
+import React, { useRef } from "react";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
-import React, { useRef } from "react";
 import { useScrollStatus } from "@/libs/hooks/use-scroll";
 import { HamburgerMenuProvider } from "./HamburgerProvider";
 import { useBreakpoint } from "@/libs/hooks/use-breakpoints";

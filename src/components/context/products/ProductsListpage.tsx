@@ -7,10 +7,10 @@ import {
   ProductList__main,
 } from "@/components/ui/styled-components/styled-products";
 
-interface ProductListProps {
-  ProductList: Array<productsProps>;
+interface ProductsListpageProps {
+  ProductsList: Array<productsProps>;
 }
-const ProductList = ({ ProductList }: ProductListProps) => {
+const ProductsListpage = ({ ProductsList }: ProductsListpageProps) => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
@@ -23,7 +23,7 @@ const ProductList = ({ ProductList }: ProductListProps) => {
           </p>
         </div>
         <ProductList__main>
-          {ProductList.map((product) => (
+          {ProductsList.map((product) => (
             <Product__list key={product.name}>
               <ProductCard products={product} />
             </Product__list>
@@ -34,4 +34,4 @@ const ProductList = ({ ProductList }: ProductListProps) => {
   );
 };
 
-export default ProductList;
+export default ProductsListpage;

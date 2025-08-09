@@ -1,12 +1,15 @@
 import Hero from "@/components/layouts/Hero";
-import { productList } from "@/libs/configs/config.data";
-import ProductList from "@/components/context/products/ProductList";
+import { productsList } from "@/libs/configs/config.data";
+import HeroBackgroundImage from "@/components/ui/wrappers/HeroBackgroundImage";
+import ProductsListpage from "@/components/context/products/ProductsListpage";
 
 export default function Home() {
   return (
     <section>
-      <Hero />
-      <ProductList ProductList={productList} />
+      <HeroBackgroundImage>
+        <Hero />
+      </HeroBackgroundImage>
+      <ProductsListpage ProductsList={productsList} />
     </section>
   );
 }

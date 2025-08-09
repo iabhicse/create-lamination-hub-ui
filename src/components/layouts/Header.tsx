@@ -1,12 +1,12 @@
 import React from "react";
 import { HeaderData } from "@/types/app";
 import Navbar_logo from "../context/navbar/Navbar_logo";
+import { ScrollDirection } from "@/libs/hooks/use-scroll";
 import Navbar_mobile from "../context/navbar/Navbar_mobile";
 import { navigationLinks } from "@/libs/configs/config.data";
 import Navbar_desktop from "../context/navbar/Navbar_desktop";
 import Navbar_hamburger from "../context/navbar/Navbar_hamburger";
 import { Header__main } from "../ui/styled-components/styled-navbar";
-import { ScrollDirection } from "@/libs/hooks/use-scroll";
 
 interface HeaderProps {
   isMobile?: boolean;

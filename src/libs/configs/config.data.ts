@@ -1,5 +1,7 @@
 import { extendedNavlink, navlink } from "@/types/app";
 
+export const currencySymbol = "₹";
+
 export const navigationLinks: Array<extendedNavlink> = [
   { id: "home", label: "Home", href: "/", icon: "Home" }, // Lucide: Home
   {
@@ -41,7 +43,6 @@ export const footerLinks: footerLinks = {
   // list of links
   quickLinks: [
     { id: "Custom Gifts", label: "Custom Gifts", href: "/", icon: "Gift" }, // Lucide: Gift
-    { id: "Occasions", label: "Occasions", href: "/", icon: "Calendar" }, // Lucide: Calendar
     { id: "Photo Gifts", label: "Photo Gifts", href: "/", icon: "Photo" }, // Lucide: Photo
     {
       id: "Corporate Gifts",
@@ -59,7 +60,7 @@ export const footerLinks: footerLinks = {
       href: "/",
       icon: "ShippingFast",
     }, // Lucide: ShippingFast
-    { id: "Returns", label: "Returns", href: "/", icon: "ArrowLeftRight" }, // Lucide: ArrowLeftRight
+    { id: "Reviews", label: "Reviews", href: "/", icon: "ArrowLeftRight" }, // Lucide: ArrowLeftRight
   ],
 
   socialLinks: [
@@ -86,17 +87,27 @@ const dummyProduct = {
   link: "/",
   name: "Tech Accessories",
   description: "Personalize your digital lifestyle",
-  price: "200",
+  price: 200,
 };
 
-export const productList = Array(8)
+export const productsList = Array(8)
   .fill(null)
   .map((_, i) => ({
     ...dummyProduct,
+    uid: i.toString(),
     name: `${dummyProduct.name} ${i + 1}`,
+    price: dummyProduct.price + i * 20,
     image: {
       ...dummyProduct.image,
+      uid: i.toString(),
       alt: `Product ${i + 1}`,
       src: `/images/product-images/product-image-0${1}.jpg`,
     },
   }));
+
+
+export const backgroundImages = [
+  "/images/bg-images/hero-bg-01.jpg",
+  "/images/bg-images/hero-bg-02.jpg"
+  // Add more image paths as needed
+];

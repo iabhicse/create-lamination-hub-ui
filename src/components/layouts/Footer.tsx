@@ -17,19 +17,6 @@ const Footer = () => {
             <p className="text-muted mb-4">
               {footerLinks.footer_messages.description}
             </p>
-            <div className="flex space-x-4">
-              {footerLinks.socialLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  className="text-muted hover:text-muted-foreground"
-                >
-                  <div className="w-6 h-6 flex items-center justify-center">
-                    <Lucid_svg iconName={link.icon} />
-                  </div>
-                </Link>
-              ))}
-            </div>
           </div>
           {/* <!-- Quick Links --> */}
           <div>
@@ -65,7 +52,19 @@ const Footer = () => {
             <p className="text-muted mb-4">
               {footerLinks.footer_messages.susbcribe}
             </p>
-            <div className="flex"></div>
+            <div className="flex space-x-4">
+              {footerLinks.socialLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="text-muted hover:text-muted-foreground"
+                >
+                  <div className="w-6 h-6 flex items-center justify-center">
+                    <Lucid_svg iconName={link.icon} />
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
