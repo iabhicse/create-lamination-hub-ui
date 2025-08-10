@@ -13,6 +13,12 @@ export const passwordRules = z
   })
   .describe("Secure password with mixed characters");
 
+export const termsAndConditionsSchema = z.object({
+  termsAccepted: z.boolean().refine((val) => val === true, {
+    message: "You must accept the terms and conditions to proceed.",
+  }),
+});
+
 // 🧾 Registration schema
 export const registrationSchema = z
   .object({
@@ -37,8 +43,10 @@ export const loginSchema = z.object({
   remember: z.boolean().optional(),
 });
 
-export const termsAndConditionsSchema = z.object({
-  termsAccepted: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms and conditions to proceed.",
-  }),
+export const contactSchema = z.object({
+  name: z.string().min(5, "Name must be at least 5 characters"),
+  email: z.email("Invalid email format").min(5, "Email is required"),
+  topic: z.string().min(5, "Topic is required"),
+  message: z.string().min(5, "Message is required"),
+  newsletter: z.boolean().optional(),
 });
