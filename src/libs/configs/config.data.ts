@@ -105,9 +105,8 @@ export const productsList = Array(8)
     },
   }));
 
-
 export const backgroundImages = [
   "/images/bg-images/hero-bg-01.jpg",
-  "/images/bg-images/hero-bg-02.jpg"
+  "/images/bg-images/hero-bg-02.jpg",
   // Add more image paths as needed
 ];

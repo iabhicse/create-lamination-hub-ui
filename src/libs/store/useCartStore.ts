@@ -8,9 +8,9 @@ const safeStorage: StateStorage = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getItem: (_key: string): string | null => null,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setItem: (_key: string, _value: string): void => { },
+  setItem: (_key: string, _value: string): void => {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  removeItem: (_key: string): void => { },
+  removeItem: (_key: string): void => {},
 };
 
 export type CartItem = {
@@ -92,7 +92,9 @@ export const useCartStore = create<CartState>()(
           return;
         }
         set({
-          items: items.map((i) => (i.uid === id ? { ...i, qty: i.qty + 1 } : i)),
+          items: items.map((i) =>
+            i.uid === id ? { ...i, qty: i.qty + 1 } : i
+          ),
           error: undefined,
         });
       },
