@@ -1,4 +1,6 @@
 "server-only";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const _envAppConfig = {
     APP_NAME: process.env.APP_NAME || "Lamination-Hub",

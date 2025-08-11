@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { loginAPI } from "@/libs/api/auth";
 import { cn } from "@/libs/utils/utils-shadcn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
@@ -36,8 +37,16 @@ const LoginPage = ({ onSwitch }: LoginPageProps) => {
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
-      // Replace with actual sign-in logic
-      console.log("Form submitted:", data);
+      const response = await loginAPI(data);
+      if (response?.statusCode) {
+        console.log("✅ Login successful:", response.user);
+        // router.push("/dashboard");
+      } else {
+        console.warn("⚠️ Logn failed:", response?.message);
+        alert(response?.message || "Login failed. Please try again.");
+      }
+
+      console.log("Response:", response);
     } catch (error) {
       console.error("Error:", error);
     }

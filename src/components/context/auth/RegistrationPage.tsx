@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { registerAPI } from "@/libs/api/auth";
 import { cn } from "@/libs/utils/utils-shadcn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
@@ -38,10 +39,27 @@ const RegistrationPage = ({ onSwitch }: RegistrationPageProps) => {
 
   const onSubmit: SubmitHandler<RegistrationFormInputs> = async (data) => {
     try {
-      // alert("Form submitted!");
-      console.log("Submitted data:", data);
-    } catch (error) {
-      console.error("Error:", error);
+      // Remove confirmPassword before sending to backend
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { confirmPassword, ...payload } = data;
+
+      const response = await registerAPI(payload);
+
+      if (response?.statusCode) {
+        console.log("✅ Registration successful:", response.user);
+        // Optionally redirect
+        // router.push("/dashboard");
+      } else {
+        const message =
+          response?.message || "Registration failed. Please try again.";
+        console.warn("⚠️ Registration failed:", message);
+        // alert(message);
+      }
+    } catch (error: unknown) {
+      const errMsg =
+        error instanceof Error ? error.message : "Unexpected error occurred";
+      console.error("❌ API error:", errMsg);
+      // alert("Something went wrong. Please try again later.");
     }
   };
 
