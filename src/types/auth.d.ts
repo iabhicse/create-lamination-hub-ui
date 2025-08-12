@@ -1,29 +1,46 @@
 // auth types file
+
+export type IUserProfileRoleType = "ADMIN" | "USER" | "MODERATOR";
+
 export interface RegisterPayload {
-    name: string;
-    email: string;
-    password: string;
+  email: string;
+  password: string;
+  fullname: string;
 }
 
 export interface LoginPayload {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
+}
+
+export interface ContactFormPayload {
+  email: string;
+  fullname: string;
+  topic: string;
+  message: string;
+  newsletter?: boolean;
 }
 
 export interface AuthResponse {
-    statusCode: boolean;
-    user: {
-        id: string;
-        user_id: string,
-        email: string;
-        fullname: string,
-        role: string,
-        created_at: string,
-        updated_at: string,
-    };
-    message: string;
+  status: "success" | "failed";
+  data?: {
+    id: string;
+    user_id: string;
+    email: string;
+    fullname: string;
+    role: IUserProfileRoleType;
+    created_at: string;
+    updated_at: string;
+  };
+  message: string;
+  error?: unknown;
 }
 
 export interface LogoutResponse {
-    message: string;
+  status: "success" | "failed";
+  message: string;
+}
+export interface ContactFormResponse {
+  status: "success" | "failed";
+  message: string;
 }

@@ -1,8 +1,9 @@
 "use client";
 
 import { z } from "zod";
-import { registerAPI } from "@/libs/api/auth";
+import { toast } from "sonner";
 import { cn } from "@/libs/utils/utils-shadcn";
+import { registerAPI } from "@/libs/api/api.auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { registrationSchema } from "@/libs/configs/config.schema";
@@ -29,7 +30,7 @@ const RegistrationPage = ({ onSwitch }: RegistrationPageProps) => {
   } = useForm<RegistrationFormInputs>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
-      name: "",
+      fullname: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -42,24 +43,17 @@ const RegistrationPage = ({ onSwitch }: RegistrationPageProps) => {
       // Remove confirmPassword before sending to backend
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...payload } = data;
-
       const response = await registerAPI(payload);
 
-      if (response?.statusCode) {
-        console.log("✅ Registration successful:", response.user);
-        // Optionally redirect
-        // router.push("/dashboard");
-      } else {
-        const message =
-          response?.message || "Registration failed. Please try again.";
-        console.warn("⚠️ Registration failed:", message);
-        // alert(message);
+      if (response?.status === "success") {
+        // Optionally redirect to login page and send a toaster message
+        onSwitch?.(0);
+        toast.success(response.message);
       }
     } catch (error: unknown) {
       const errMsg =
         error instanceof Error ? error.message : "Unexpected error occurred";
       console.error("❌ API error:", errMsg);
-      // alert("Something went wrong. Please try again later.");
     }
   };
 
@@ -72,22 +66,22 @@ const RegistrationPage = ({ onSwitch }: RegistrationPageProps) => {
       <div className="grid gap-6">
         {/* Name */}
         <div className="grid gap-2">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="fullname">Full Name</Label>
           <Input
-            id="name"
+            id="fullname"
             type="text"
             placeholder="Your full name"
-            autoComplete="name"
-            {...register("name")}
+            autoComplete="fullname"
+            {...register("fullname")}
             className={cn(
               "h-11 rounded-none border-0 border-b border-neutral-300 px-2 text-base shadow-none focus:ring-0 focus-visible:ring-0 focus:border-rose-500",
-              errors.name && "border-red-300"
+              errors.fullname && "border-red-300"
             )}
-            aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? "name-error" : undefined}
+            aria-invalid={!!errors.fullname}
+            aria-describedby={errors.fullname ? "name-error" : undefined}
           />
           <AnimatePresence>
-            {errors.name && (
+            {errors.fullname && (
               <motion.p
                 id="name-error"
                 initial={{ opacity: 0, y: -4 }}
@@ -95,7 +89,7 @@ const RegistrationPage = ({ onSwitch }: RegistrationPageProps) => {
                 exit={{ opacity: 0, y: -4 }}
                 className="text-xs text-red-600"
               >
-                {errors.name.message}
+                {errors.fullname.message}
               </motion.p>
             )}
           </AnimatePresence>

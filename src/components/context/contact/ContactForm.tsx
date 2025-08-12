@@ -1,7 +1,9 @@
 "use client";
 
 import { z } from "zod";
+import { toast } from "sonner";
 import { cn } from "@/libs/utils/utils-shadcn";
+import { contactAPI } from "@/libs/api/api.auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { contactSchema } from "@/libs/configs/config.schema";
@@ -23,20 +25,26 @@ const ContactForm = () => {
   } = useForm<ContactFormInputs>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      name: "",
       email: "",
       topic: "",
       message: "",
+      fullname: "",
       newsletter: false,
     },
   });
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
     try {
-      // Replace with actual sign-in logic
-      console.log("Form submitted:", data);
-    } catch (error) {
-      console.error("Error:", error);
+      const response = await contactAPI(data);
+
+      if (response?.status === "success") {
+        // Optionally send a toaster message
+        toast.success(response.message);
+      }
+    } catch (error: unknown) {
+      const errMsg =
+        error instanceof Error ? error.message : "Unexpected error occurred";
+      console.error("❌ API error:", errMsg);
     }
   };
 
@@ -49,22 +57,22 @@ const ContactForm = () => {
       <div className="grid gap-6">
         {/* Name */}
         <div className="grid gap-2">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">Fullname</Label>
           <Input
-            id="name"
+            id="contact-fullname"
             type="text"
             placeholder="Your full name"
-            autoComplete="name"
-            {...register("name")}
+            autoComplete="fullname"
+            {...register("fullname")}
             className={cn(
               "h-11 rounded-none border-0 border-b border-neutral-300 px-2 text-base shadow-none focus:ring-0 focus-visible:ring-0 focus:border-rose-500",
-              errors.name && "border-red-300"
+              errors.fullname && "border-red-300"
             )}
-            aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? "name-error" : undefined}
+            aria-invalid={!!errors.fullname}
+            aria-describedby={errors.fullname ? "name-error" : undefined}
           />
           <AnimatePresence>
-            {errors.name && (
+            {errors.fullname && (
               <motion.p
                 id="name-error"
                 initial={{ opacity: 0, y: -4 }}
@@ -72,7 +80,7 @@ const ContactForm = () => {
                 exit={{ opacity: 0, y: -4 }}
                 className="text-xs text-red-600"
               >
-                {errors.name.message}
+                {errors.fullname.message}
               </motion.p>
             )}
           </AnimatePresence>
