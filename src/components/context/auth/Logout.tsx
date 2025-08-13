@@ -2,8 +2,8 @@
 import React from "react";
 import { toast } from "sonner";
 import { logoutAPI } from "@/libs/api/api.auth";
-import { Button } from "@/components/ui/shadcn/button";
 import { useAuthStore } from "@/libs/store/useAuthStore";
+import Button_underline from "@/components/ui/custom/Button_underline";
 
 const Logout = () => {
   const { logout } = useAuthStore();
@@ -15,11 +15,7 @@ const Logout = () => {
       logout();
     }
   };
-  return (
-    <Button onClick={handleLogout} variant={"gradient"}>
-      Logout
-    </Button>
-  );
+  return <Button_underline onClick={handleLogout}>Logout</Button_underline>;
 };
 
 export default Logout;

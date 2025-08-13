@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Lucid_svg from "../ui/helper/Lucid_svg";
 import { Button } from "../ui/shadcn/button";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
@@ -10,16 +12,26 @@ const Hero = () => {
       <div className="relative w-full px-6 py-40">
         <div className="w-full lg:w-2/3 flex flex-col items-center-safe justify-end">
           <div className="max-w-2xl">
-            <div className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-5xl font-bold text-gray-900 mb-6 leading-tight"
+            >
               Create Unique,
               <br />
               <span className="text-primary">Personalized Gifts</span>
-            </div>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-xl text-gray-600 mb-8 leading-relaxed"
+            >
               Transform ordinary moments into extraordinary memories with our
               custom gift collection. Design, personalize, and create something
               truly special for your loved ones.
-            </p>
+            </motion.p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link href={"/collections"}>
                 <Button

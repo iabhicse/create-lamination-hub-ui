@@ -8,6 +8,7 @@ export interface AuthUser {
   user_id: string;
   email: string;
   fullname: string;
+  avatar: string;
   role: IUserProfileRoleType;
   created_at: string;
   updated_at: string;

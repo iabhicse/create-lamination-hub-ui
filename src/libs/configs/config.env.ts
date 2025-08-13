@@ -18,7 +18,7 @@ const _envPersonalInfo = {
 
 const _envBackendConfig = {
   APP_BACKEND: "https://api.laminationhub.in",
-  APP_BACKEND_API_URL: "https://api.laminationhub.in/api"
+  APP_BACKEND_API_URL: "https://api.laminationhub.in/api",
 };
 
 const _envFrontendConfig = {

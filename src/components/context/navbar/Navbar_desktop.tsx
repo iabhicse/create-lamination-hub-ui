@@ -1,8 +1,8 @@
 import React from "react";
-import Logout from "../auth/Logout";
 import Navbar_link from "./Navbar_link";
 import Navbar_cart from "./Navbar_cart";
 import Navbar_auth from "./Navbar_auth";
+import Navbar_user from "./Navbar_user";
 import { extendedNavlink } from "@/types/app";
 
 interface Navbar_desktopProps {
@@ -19,7 +19,7 @@ const Navbar_desktop = ({
       {navbarlinks.map((link) => (
         <Navbar_link key={link.id} link={link} />
       ))}
-      {isAuthenticated ? <Logout /> : <Navbar_auth />}
+      {isAuthenticated ? <Navbar_user /> : <Navbar_auth />}
       <Navbar_cart />
     </div>
   );

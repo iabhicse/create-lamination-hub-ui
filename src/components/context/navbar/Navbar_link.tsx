@@ -12,12 +12,12 @@ const Navbar_link: React.FC<NavlinkProps & { style?: React.CSSProperties }> = ({
     <Link
       key={link.id}
       href={link.href}
-      className={`group relative w-fit font-medium text-[1rem] transition-colors duration-200 ${
+      className={`group/link relative w-fit font-medium text-[1rem] transition-colors duration-200 ${
         isActive ? "text-secondary" : "text-muted"
       }`}
     >
       {link.label}
-      <span className="absolute left-1/2 bottom-0 w-0 h-0.5 bg-muted transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+      <span className="absolute left-1/2 bottom-0 w-0 h-0.5 bg-muted transition-all duration-300 group-hover/link:w-full group-hover/link:left-0"></span>
     </Link>
   );
 };

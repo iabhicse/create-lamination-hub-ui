@@ -110,3 +110,60 @@ export const backgroundImages = [
   "/images/bg-images/hero-bg-02.jpg",
   // Add more image paths as needed
 ];
+
+export const swiperLinks = [
+  {
+    id: "theme01",
+    color: "",
+    className: "",
+    image: {
+      src: "/images/banner/banner-01.png",
+      alt: "theme01",
+      width: 2560,
+      height: 1440,
+    },
+  },
+  {
+    id: "theme02",
+    color: "",
+    className: "",
+    image: {
+      src: "/images/banner/banner-02.png",
+      alt: "theme02",
+      width: 2560,
+      height: 1440,
+    },
+  },
+  {
+    id: "theme03",
+    className: "",
+    color: "",
+    image: {
+      src: "/images/banner/banner-01.png",
+      alt: "theme03",
+      width: 2560,
+      height: 1440,
+    },
+  },
+  {
+    id: "theme04",
+    className: "",
+    color: "",
+    image: {
+      src: "/images/banner/banner-02.png",
+      alt: "theme04",
+      width: 2560,
+      height: 1440,
+    },
+  },
+];
+
+export const dropdownLinks: extendedNavlink = {
+  id: "Services",
+  label: "Services",
+  href: "/",
+  sublinks: [
+    { id: "Custom Gifts", label: "Custom Gifts", href: "/", icon: "Gift" },
+    { id: "Photo Gifts", label: "Photo Gifts", href: "/", icon: "Photo" },
+  ],
+};
