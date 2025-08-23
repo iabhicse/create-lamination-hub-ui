@@ -1,14 +1,10 @@
 import "../styles/globals.css";
-import type { Metadata } from "next";
-
+import { poppins, roboto } from "@/libs/configs/config.styles";
 import LayoutProvider from "@/components/providers/LayoutProvider";
 
-export const metadata: Metadata = {
-  title: "Lamination-Hub",
-  description: "Tera style teri choice - lamination-hub always right",
-  keywords:
-    "Lamination-Hub, Lamination, Laminate, Laminations, Personal Memories , gifts",
-};
+import { Metadata } from "next";
+import HomePageSEO from "@/libs/seo/seo.homepage";
+export const metadata: Metadata = HomePageSEO;
 
 export default function RootLayout({
   children,
@@ -17,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` antialiased relative scroll-smooth`}>
+      <body
+        className={`${roboto.variable} ${poppins.variable} antialiased relative scroll-smooth`}
+      >
         <LayoutProvider>{children}</LayoutProvider>
       </body>
     </html>

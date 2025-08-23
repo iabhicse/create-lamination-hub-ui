@@ -1,18 +1,18 @@
 import React from "react";
 import { Button } from "../shadcn/button";
 
-interface Button_underlineProps {
-  isActive?: boolean;
+interface Button_centerUnderlineProps {
+  isActive: boolean;
   label?: string;
   onClick?: () => void;
   children?: React.ReactNode;
 }
-const Button_underline = ({
+const Button_centerUnderline = ({
   isActive,
   label,
   onClick,
   children,
-}: Button_underlineProps) => {
+}: Button_centerUnderlineProps) => {
   return (
     <Button
       variant={"empty"}
@@ -29,4 +29,4 @@ const Button_underline = ({
   );
 };
 
-export default Button_underline;
+export default Button_centerUnderline;

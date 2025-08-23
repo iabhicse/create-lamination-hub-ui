@@ -1,8 +1,8 @@
 import React from "react";
 import { productsProps } from "@/types/products";
 import AddtoCartButton from "../cart/AddtoCartButton";
-import ImageComponent from "@/components/ui/helper/Image";
-import { currencySymbol } from "@/libs/configs/config.data";
+import ImageComponent from "@/components/ui/images/Image_component";
+import { symbolOfCurrency } from "@/libs/configs/config.data";
 
 interface ProductCardProps {
   products: productsProps;
@@ -14,14 +14,18 @@ const ProductCard = ({ products }: ProductCardProps) => {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       <div className="aspect-auto overflow-hidden h-[128px]">
-        <ImageComponent src={imageArray[0].src} alt="Product" />
+        <ImageComponent
+          id={`product-image-${uid}`}
+          src={imageArray[0].src}
+          alt={imageArray[0].alt}
+        />
       </div>
       <div className="p-6">
         <h4 className="text-xl font-semibold text-gray-900 mb-2">{name}</h4>
         <p className="text-gray-600 mb-4 p.small">{description}</p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold text-primary">
-            From {currencySymbol}
+            From {symbolOfCurrency}
             {price}
           </span>
           <AddtoCartButton

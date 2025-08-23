@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import AuthPage from "@/components/layouts/AuthPage";
 import { Button } from "@/components/ui/shadcn/button";
-import { SheetDescription, SheetTitle } from "@/components/ui/shadcn/sheet";
 import { Dialog, DialogTrigger } from "@/components/ui/shadcn/dialog";
 import { DialogContentUserAuth } from "@/components/ui/custom/dialog";
+import { SheetDescription, SheetTitle } from "@/components/ui/shadcn/sheet";
 
 const Navbar_auth = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);

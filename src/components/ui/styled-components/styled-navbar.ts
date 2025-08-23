@@ -87,7 +87,7 @@ export const HamburgerMenu = styled.button`
 export const HamburgerLine = styled(motion.div)`
   width: 25px;
   height: 3px;
-  background: var(--primary);
+  background: var(--muted);
   margin: 2px 0;
   border-radius: 2px;
 `;

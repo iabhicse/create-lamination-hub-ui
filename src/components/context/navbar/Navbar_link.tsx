@@ -1,18 +1,26 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { NavlinkProps } from "@/types/app";
+import { NavLink } from "@/types/app";
+// Props for rendering a single navigation link
+export interface NavLinkProps {
+  link: NavLink;
+  isActive?: boolean;
+  onClick?: (link: NavLink) => void;
+  isMobile?: boolean;
+  fontSize?: string;
+}
 
-const Navbar_link: React.FC<NavlinkProps & { style?: React.CSSProperties }> = ({
+const Navbar_link: React.FC<NavLinkProps & { style?: React.CSSProperties }> = ({
   link,
   isActive,
+  fontSize = "1rem",
 }) => {
   return (
     <Link
       key={link.id}
       href={link.href}
-      className={`group/link relative w-fit font-medium text-[1rem] transition-colors duration-200 ${
+      style={{ fontSize: fontSize }}
+      className={`group/link relative w-fit font-medium transition-colors duration-200 ${
         isActive ? "text-secondary" : "text-muted"
       }`}
     >

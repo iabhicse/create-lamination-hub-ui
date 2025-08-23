@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { backgroundImages } from "@/libs/configs/config.data";
+import { backgroundImages } from "@/libs/data/data.layout";
 
 const HeroBackgroundImage = ({ children }: { children: React.ReactNode }) => {
   const [currentBackground, setCurrentBackground] = useState(0);

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Logout from "../auth/Logout";
-import Navbar_link from "./Navbar_link";
+import Logout from "../../auth/Logout";
+import Navbar_link from "../Navbar_link";
 import { useAuthStore } from "@/libs/store/useAuthStore";
 import { Avatar, AvatarImage } from "@/components/ui/shadcn/avatar";
 

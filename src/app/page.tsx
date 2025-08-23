@@ -1,15 +1,16 @@
 import Hero from "@/components/layouts/Hero";
+import { swiperLinks } from "@/libs/data/data.layout";
+import { productsList } from "@/libs/data/data.products";
 import SwiperSlider from "@/components/ui/swiper/SwiperSlider";
-import { productsList, swiperLinks } from "@/libs/configs/config.data";
-import HeroBackgroundImage from "@/components/ui/wrappers/HeroBackgroundImage";
 import ProductsListpage from "@/components/context/products/ProductsListpage";
+import BackgroundProvider from "@/components/providers/BackgroundProvider";
 
 export default function Home() {
   return (
-    <section>
-      <HeroBackgroundImage>
+    <section className="relative">
+      <BackgroundProvider variants={"fade_Effect"}>
         <Hero />
-      </HeroBackgroundImage>
+      </BackgroundProvider>
       <ProductsListpage ProductsList={productsList} />
       <SwiperSlider
         swiperLinks={swiperLinks}

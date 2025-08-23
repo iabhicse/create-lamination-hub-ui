@@ -1,5 +1,5 @@
 import axios from "axios";
-import { envBackendConfig } from "../configs/config.env";
+import { envBackendConfig } from "../env/env.backend";
 
 // Only used for logging/debugging in development
 const isDev = process.env.NODE_ENV === "development";

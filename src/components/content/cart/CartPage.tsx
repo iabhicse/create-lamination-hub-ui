@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/shadcn/button";
 import { useCartStore } from "@/libs/store/useCartStore";
 import CartList from "@/components/context/cart/CartList";
 import CartEmpty from "@/components/context/cart/CartEmpty";
-import { currencySymbol } from "@/libs/configs/config.data";
+import { symbolOfCurrency } from "@/libs/configs/config.data";
 
 const CartPage = () => {
   const { items, clearCart, getTotal } = useCartStore();
@@ -22,7 +22,7 @@ const CartPage = () => {
             <div className="flex items-center justify-between">
               <span>Subtotal</span>
               <span className="font-semibold">
-                {currencySymbol + total.toFixed(2)}
+                {symbolOfCurrency + total.toFixed(2)}
               </span>
             </div>
             <Button className="w-full" variant={"gradient"}>

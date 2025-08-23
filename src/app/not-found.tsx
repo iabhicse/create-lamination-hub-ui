@@ -78,7 +78,7 @@ const NotFound = () => {
           className="text-lg text-muted-foreground sm:text-xl"
           variants={itemVariants}
         >
-          This page is under construction. Please check back later.
+          It seems you&apos;ve ventured into uncharted territory.
         </motion.p>
         <motion.div variants={itemVariants}>
           <Link

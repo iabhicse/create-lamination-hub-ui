@@ -1,8 +1,8 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/shadcn/button";
 import { CartItem, useCartStore } from "@/libs/store/useCartStore";
-import React from "react";
 
 type AddtoCartButtonProps = {
   item: CartItem;

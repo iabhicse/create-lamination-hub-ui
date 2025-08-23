@@ -2,8 +2,8 @@
 import React from "react";
 import { useCartStore } from "@/libs/store/useCartStore";
 import { Button } from "@/components/ui/shadcn/button";
-import { currencySymbol } from "@/libs/configs/config.data";
-import ImageComponent from "@/components/ui/helper/Image";
+import { symbolOfCurrency } from "@/libs/configs/config.data";
+import Image_component from "@/components/ui/images/Image_component";
 
 const CartList = () => {
   const { items, increaseQty, decreaseQty, removeItem } = useCartStore();
@@ -15,14 +15,15 @@ const CartList = () => {
   return (
     <>
       <ul className="space-y-4">
-        {items.map((i) => (
+        {items.map((i, index) => (
           <li
             key={i.name}
             className="flex items-center justify-between rounded-lg border p-4 bg-card"
           >
             {imageArray.length > 0 && (
               <div className="flex items-center justify-center">
-                <ImageComponent
+                <Image_component
+                  id={`${i.name}-${index}`}
                   width={128}
                   height={128}
                   src={imageArray[0].src}
@@ -33,8 +34,8 @@ const CartList = () => {
             <div>
               <p className="font-medium">{i.name}</p>
               <p className="text-sm text-muted-foreground">
-                {currencySymbol}
-                {(i.price * i.qty).toFixed(2)} •{currencySymbol}
+                {symbolOfCurrency}
+                {(i.price * i.qty).toFixed(2)} •{symbolOfCurrency}
                 {i.price.toFixed(2)} each
               </p>
             </div>

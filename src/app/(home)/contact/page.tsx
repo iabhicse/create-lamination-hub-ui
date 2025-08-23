@@ -1,10 +1,10 @@
+import Contact_contentPage from "@/components/content/contact/Contact_contentPage";
 import React from "react";
-import ContactPage from "@/components/content/contact/ContactPage";
 
 const ContactMainPage = () => {
   return (
     <section>
-      <ContactPage />
+      <Contact_contentPage />
     </section>
   );
 };

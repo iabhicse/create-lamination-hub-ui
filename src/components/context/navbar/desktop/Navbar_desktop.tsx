@@ -1,18 +1,18 @@
 import React from "react";
-import Navbar_link from "./Navbar_link";
-import Navbar_cart from "./Navbar_cart";
-import Navbar_auth from "./Navbar_auth";
+import Navbar_link from "../Navbar_link";
+import { ExtendedNavLink } from "@/types/app";
 import Navbar_user from "./Navbar_user";
-import { extendedNavlink } from "@/types/app";
+import Navbar_auth from "./Navbar_auth";
+import Navbar_cart from "./Navbar_cart";
 
 interface Navbar_desktopProps {
-  navbarlinks: Array<extendedNavlink>;
+  navbarlinks: Array<ExtendedNavLink>;
   isAuthenticated: boolean;
 }
 
 const Navbar_desktop = ({
-  navbarlinks,
   isAuthenticated,
+  navbarlinks,
 }: Navbar_desktopProps) => {
   return (
     <div className="flex items-center justify-between space-x-4">

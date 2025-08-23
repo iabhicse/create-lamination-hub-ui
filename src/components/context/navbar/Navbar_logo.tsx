@@ -40,5 +40,5 @@ const Navbar_logo = ({ image, label }: NavbarImgProps) => {
 export default Navbar_logo;
 
 const Image_component = ({ src, alt }: { src: string; alt: string }) => (
-  <Image src={src} alt={alt} width={256} height={56} loading="lazy" />
+  <Image src={src} alt={alt} width={250} height={100} loading="lazy" />
 );

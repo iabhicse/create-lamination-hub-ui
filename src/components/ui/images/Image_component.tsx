@@ -1,16 +1,9 @@
+import clsx from "clsx";
 import React from "react";
 import Image from "next/image";
-import { cn } from "@/libs/utils/utils-shadcn";
+import { ImageProps } from "@/types/app";
 
-interface ImageProps {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  className?: string;
-}
-
-const ImageComponent = ({
+const Image_component = ({
   src,
   alt,
   width = 512,
@@ -23,7 +16,7 @@ const ImageComponent = ({
       alt={alt}
       width={width}
       height={height}
-      className={cn(
+      className={clsx(
         className,
         "w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
       )}
@@ -31,4 +24,4 @@ const ImageComponent = ({
   );
 };
 
-export default ImageComponent;
+export default Image_component;

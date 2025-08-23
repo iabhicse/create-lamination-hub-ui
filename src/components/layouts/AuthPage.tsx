@@ -1,49 +1,46 @@
+"use client";
 import { useRef } from "react";
+import SwiperCore from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import LoginPage from "../context/auth/LoginPage";
 import { AuthCard } from "../ui/wrappers/AuthCard";
 import RegistrationPage from "../context/auth/RegistrationPage";
 
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/shadcn/carousel";
-
 const AuthPage = () => {
-  const carouselRef = useRef<CarouselApi | null>(null);
+  const swiperRef = useRef<SwiperCore | null>(null);
 
-  const handleSwitch = (index: number) => {
-    carouselRef.current?.scrollTo(index);
+  const handleSwiper = (Index: number) => {
+    swiperRef.current?.slideTo(Index);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4">
-      <Carousel
-        className="w-fit"
-        opts={{ loop: true, align: "center" }}
-        setApi={(api) => (carouselRef.current = api)}
+    <div className="flex flex-col items-center justify-center">
+      <Swiper
+        loop={true}
+        className="max-w-[800px] scale-90"
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
       >
-        <CarouselContent>
-          <CarouselItem className="px-2">
-            <AuthCard
-              title="Sign in"
-              subtitle="Welcome back. We are glad to see you."
-            >
-              <LoginPage onSwitch={handleSwitch} />
-            </AuthCard>
-          </CarouselItem>
+        <SwiperSlide>
+          <AuthCard
+            title="Sign in"
+            subtitle="Welcome back. We are glad to see you."
+          >
+            <LoginPage onSwitch={handleSwiper} />
+          </AuthCard>
+        </SwiperSlide>
 
-          <CarouselItem className="px-2">
-            <AuthCard
-              title="Create account"
-              subtitle="Join us and explore the experience."
-            >
-              <RegistrationPage onSwitch={handleSwitch} />
-            </AuthCard>
-          </CarouselItem>
-        </CarouselContent>
-      </Carousel>
+        <SwiperSlide>
+          <AuthCard
+            title="Create account"
+            subtitle="Join us and explore the experience."
+          >
+            <RegistrationPage onSwitch={handleSwiper} />
+          </AuthCard>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 };

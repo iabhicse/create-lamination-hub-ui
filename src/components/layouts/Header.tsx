@@ -1,12 +1,13 @@
 import React from "react";
-import { HeaderData } from "@/types/app";
+import { HeaderConfig } from "@/types/app";
+import Sidebar from "../ui/custom/Sidebar";
 import Navbar_logo from "../context/navbar/Navbar_logo";
+import { navigationLinks } from "@/libs/data/data.layout";
 import { ScrollDirection } from "@/libs/hooks/use-scroll";
-import Navbar_mobile from "../context/navbar/Navbar_mobile";
-import { navigationLinks } from "@/libs/configs/config.data";
-import Navbar_desktop from "../context/navbar/Navbar_desktop";
-import Navbar_hamburger from "../context/navbar/Navbar_hamburger";
+import Navbar_mobile from "../context/navbar/mobile/Navbar_mobile";
 import { Header__main } from "../ui/styled-components/styled-navbar";
+import Navbar_desktop from "../context/navbar/desktop/Navbar_desktop";
+import Navbar_hamburger from "../context/navbar/mobile/Navbar_hamburger";
 
 interface HeaderProps {
   isMobile?: boolean;
@@ -26,13 +27,9 @@ const Header = ({
   scrollDir,
   isAuthenticated,
 }: HeaderProps) => {
-  const headerData: HeaderData = {
-    header_logo: {
-      href: "/",
-      src: "/images/lamination-hub-text-logo.png",
-      alt: "Lamination Hub",
-    },
-    navbarlinks: navigationLinks,
+  const HeaderConfig: HeaderConfig = {
+    logo: "",
+    navLinks: navigationLinks,
   };
 
   const isResponsive = isMobile || isTablet;
@@ -58,11 +55,9 @@ const Header = ({
           //logo
           //logo
           <Navbar_logo
-            image={headerData.header_logo}
+            image="/images/lamination-hub-text-logo.png"
             label={
-              typeof headerData.header_logo === "string"
-                ? headerData.header_logo
-                : ""
+              typeof HeaderConfig.logo === "string" ? HeaderConfig.logo : ""
             }
           />
         }
@@ -71,13 +66,13 @@ const Header = ({
           // hamburger icon
           // hamburger icon
           // hamburger icon
-          <Navbar_hamburger />
+          <Navbar_hamburger menuKey="hamburger-menu" />
         ) : (
           // Desktop only version
           // Desktop only version
           // Desktop only version
           <Navbar_desktop
-            navbarlinks={headerData.navbarlinks}
+            navbarlinks={HeaderConfig.navLinks}
             isAuthenticated={isAuthenticated || false}
           />
         )}
@@ -87,10 +82,12 @@ const Header = ({
         // mobile or tablet version sidebar
         // mobile or tablet version sidebar
         isResponsive ? (
-          <Navbar_mobile
-            navbarlinks={headerData.navbarlinks}
-            isAuthenticated={isAuthenticated || false}
-          />
+          <Sidebar menuKey="hamburger-menu">
+            <Navbar_mobile
+              navbarlinks={HeaderConfig.navLinks}
+              isAuthenticated={isAuthenticated || false}
+            />
+          </Sidebar>
         ) : null
       }
     </>
