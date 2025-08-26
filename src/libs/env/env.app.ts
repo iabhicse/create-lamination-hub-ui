@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // ✅ Schema uses the actual env var names (with NEXT_PUBLIC_ prefix)
 const envConfigSchema = z.object({
-  NEXT_PUBLIC_APP_NAME: z.string().default("Frontend-template"),
+  NEXT_PUBLIC_APP_NAME: z.string().default("Lamination-Hub"),
   NEXT_PUBLIC_APP_VERSION: z.string().default("2.0.0"),
   NEXT_PUBLIC_APP_HOST: z.string().default("localhost"),
   NEXT_PUBLIC_APP_ENV: z
