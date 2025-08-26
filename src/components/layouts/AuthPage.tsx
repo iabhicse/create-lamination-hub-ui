@@ -15,10 +15,10 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center scale-90">
       <Swiper
         loop={true}
-        className="max-w-[800px] scale-90"
+        className="max-w-2xl px-0"
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}

@@ -14,7 +14,7 @@ export function AuthCard({
   className?: string;
 }>) {
   return (
-    <section className="mx-auto flex min-h-dvh max-w-7xl items-center px-4 py-4 sm:px-6 lg:px-8">
+    <section className="mx-auto flex min-h-dvh max-w-7xl items-center">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
