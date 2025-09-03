@@ -16,6 +16,7 @@ export const Product__list = styled(motion.div)`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: all 0.3s ease-in-out;
+  border-radius: 30px 0px 15px 0px;
 
   &:hover {
     transform: translateY(-5px);

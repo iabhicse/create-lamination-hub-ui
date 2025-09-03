@@ -4,9 +4,10 @@ import { envBackendConfig } from "../env/env.backend";
 
 // Only used for logging/debugging in development
 const isDev = process.env.NODE_ENV === "development";
-const baseURL = process.env.NEXT_PUBLIC_BACKEND_API_URL || envBackendConfig.APP_BACKEND_API_URL;
+const baseURL =
+  process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+  envBackendConfig.APP_BACKEND_API_URL;
 // console.log(`Axios Base URL: ${baseURL}`);
-
 
 // Create Axios instance
 export const axiosInstance = axios.create({

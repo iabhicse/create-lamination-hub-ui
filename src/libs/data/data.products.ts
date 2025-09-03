@@ -1,25 +1,132 @@
-const dummyProduct = {
-  image: {
-    src: "/images/product-images/product-image-01.jpg",
-    alt: "Product 1",
-  },
-  link: "/",
-  name: "Tech Accessories",
-  description: "Personalize your digital lifestyle",
-  price: 200,
-};
-
-export const productsList = Array(8)
-  .fill(null)
-  .map((_, i) => ({
-    ...dummyProduct,
-    uid: i.toString(),
-    name: `${dummyProduct.name} ${i + 1}`,
-    price: dummyProduct.price + i * 20,
+// Product data
+const currentProductsList = [
+  {
+    name: "Photo Frame",
+    description: "Elegant frame to showcase your memories",
+    link: "/photo-frame",
+    price: 400,
+    category: "Home Decor",
+    tags: ["frame", "gift", "personalized", "decor"],
+    rating: 4.5,
+    stock: 12,
+    slug: "photo-frame",
     image: {
-      ...dummyProduct.image,
-      uid: i.toString(),
-      alt: `Product ${i + 1}`,
-      src: `/images/product-images/product-image-0${1}.jpg`,
+      src: "/images/product-images/Photo-Frame.jpg",
+      alt: "Photo Frame",
     },
-  }));
+  },
+  {
+    name: "Magic Mug",
+    description: "Reveals your photo when hot",
+    link: "/magic-mug",
+    price: 350,
+    category: "Drinkware",
+    tags: ["mug", "heat-sensitive", "custom", "gift"],
+    rating: 4.7,
+    stock: 20,
+    slug: "magic-mug",
+    image: {
+      src: "/images/product-images/Magic-Mug.jpg",
+      alt: "Magic Mug",
+    },
+  },
+  {
+    name: "Heart Pillow",
+    description: "Soft and cozy heart-shaped pillow",
+    link: "/heart-pillow",
+    price: 500,
+    category: "Soft Furnishings",
+    tags: ["pillow", "heart", "valentine", "cushion"],
+    rating: 4.6,
+    stock: 8,
+    slug: "heart-pillow",
+    image: {
+      src: "/images/product-images/Heart-Pillow.jpg",
+      alt: "Heart Pillow",
+    },
+  },
+  {
+    name: "Special Bottle",
+    description: "Customizable bottle with premium finish",
+    link: "/special-bottle",
+    price: 750,
+    category: "Drinkware",
+    tags: ["bottle", "custom", "gift", "premium"],
+    rating: 4.8,
+    stock: 5,
+    slug: "special-bottle",
+    image: {
+      src: "/images/product-images/Special-Bottle.jpg",
+      alt: "Special Bottle",
+    },
+  },
+  {
+    name: "Classic Mug",
+    description: "Classic ceramic premium mug for everyday use",
+    link: "/classic-mug",
+    price: 350,
+    category: "Drinkware",
+    tags: ["mug", "ceramic", "daily-use"],
+    rating: 4.3,
+    stock: 25,
+    slug: "classic-mug",
+    image: {
+      src: "/images/product-images/classic-Mug.jpg",
+      alt: "Classic Mug",
+    },
+  },
+  {
+    name: "Square Pillow",
+    description: "Stylish square pillow for decor",
+    link: "/square-pillow",
+    price: 300,
+    category: "Soft Furnishings",
+    tags: ["pillow", "square", "decor", "cushion"],
+    rating: 4.4,
+    stock: 15,
+    slug: "square-pillow",
+    image: {
+      src: "/images/product-images/Square-Pillow.jpg",
+      alt: "Square Pillow",
+    },
+  },
+  {
+    name: "Patch Mug",
+    description: "Durable patch Mug for daily hydration",
+    link: "/patch-mug",
+    price: 750,
+    category: "Drinkware",
+    tags: ["bottle", "durable", "hydration"],
+    rating: 4.2,
+    stock: 18,
+    slug: "patch-mug",
+    image: {
+      src: "/images/product-images/Patch-Mug.jpg",
+      alt: "Patch-Mug",
+    },
+  },
+  {
+    name: "Steel Mug",
+    description: "steel version of our mug with custom finish",
+    link: "/steel-mug",
+    price: 350,
+    category: "Soft Furnishings",
+    tags: ["bottle", "durable", "hydration"],
+    rating: 4.5,
+    stock: 10,
+    slug: "steel-mug",
+    image: {
+      src: "/images/product-images/Steel-Mug.jpg",
+      alt: "Steel-Mug",
+    },
+  },
+];
+
+export const productsList = currentProductsList.map((product, i) => ({
+  ...product,
+  uid: i.toString(),
+  image: {
+    ...product.image,
+    uid: i.toString(),
+  },
+}));

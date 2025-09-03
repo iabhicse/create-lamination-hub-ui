@@ -1,16 +1,20 @@
 "use client";
 import React from "react";
-import { useCartStore } from "@/libs/store/useCartStore";
+import Link from "next/link";
 import { Button } from "@/components/ui/shadcn/button";
 import { symbolOfCurrency } from "@/libs/configs/config.data";
+import { CartItem, useCartStore } from "@/libs/store/useCartStore";
 import Image_component from "@/components/ui/images/Image_component";
+
+const cartImage = (item: CartItem) => {
+  if (item.image && Array.isArray(item.image)) {
+    return item.image[0];
+  }
+  return item.image;
+};
 
 const CartList = () => {
   const { items, increaseQty, decreaseQty, removeItem } = useCartStore();
-  const imageArray =
-    items[0].image && Array.isArray(items[0].image)
-      ? items[0].image
-      : [items[0].image];
 
   return (
     <>
@@ -20,19 +24,24 @@ const CartList = () => {
             key={i.name}
             className="flex items-center justify-between rounded-lg border p-4 bg-card"
           >
-            {imageArray.length > 0 && (
-              <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center">
+              <Link href={`products/${i.link}`} className="cursor-pointer">
                 <Image_component
                   id={`${i.name}-${index}`}
                   width={128}
                   height={128}
-                  src={imageArray[0].src}
-                  alt={imageArray[0].alt}
+                  src={cartImage(i).src}
+                  alt={cartImage(i).alt}
+                  className="cursor-pointer"
+                  style={{ borderRadius: "30px 0px 15px 0px" }}
                 />
-              </div>
-            )}
+              </Link>
+            </div>
             <div>
-              <p className="font-medium">{i.name}</p>
+              <Link href={i.link} className="font-medium cursor-pointer">
+                {i.name}
+              </Link>
+              {/* <p className="font-medium">{i.name}</p> */}
               <p className="text-sm text-muted-foreground">
                 {symbolOfCurrency}
                 {(i.price * i.qty).toFixed(2)} •{symbolOfCurrency}
