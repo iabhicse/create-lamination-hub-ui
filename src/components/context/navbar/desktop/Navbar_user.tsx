@@ -25,10 +25,17 @@ const Navbar_user = () => {
 
         <div className="absolute top-full w-fit min-w-20 -left-5 mt-2 bg-white border border-slate-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
           <div className=" flex flex-col gap-2 p-2 text-center">
-            <Navbar_link
-              key={"Profile"}
-              link={{ id: "Profile", label: "Profile", href: "/profile" }}
-            />
+            {user?.role === "ADMIN" ? (
+              <Navbar_link
+                key={"Dashboard"}
+                link={{ id: "Dashboard", label: "Dashboard", href: "/admin" }}
+              />
+            ) : (
+              <Navbar_link
+                key={"Profile"}
+                link={{ id: "Profile", label: "Profile", href: "/profile" }}
+              />
+            )}
             <Logout />
           </div>
         </div>

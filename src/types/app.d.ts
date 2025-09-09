@@ -55,3 +55,10 @@ export interface RootLayoutData {
   header: HeaderConfig;
   footer: FooterConfig;
 }
+
+export interface SidebarItem {
+  id: string;
+  label: string;
+  icon: string;
+  active?: boolean;
+}

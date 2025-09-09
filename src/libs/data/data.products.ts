@@ -71,7 +71,7 @@ const currentProductsList = [
     stock: 25,
     slug: "classic-mug",
     image: {
-      src: "/images/product-images/classic-Mug.jpg",
+      src: "/images/product-images/Classic-Mug.jpg",
       alt: "Classic Mug",
     },
   },
