@@ -1,17 +1,14 @@
-import { toast } from "sonner";
-import { axiosInstance } from "./api.axios";
+import axiosInstance from "./api.axios";
 
 import {
-  LoginPayload,
+  LoginFormPayload,
   AuthResponse,
-  LogoutResponse,
-  RegisterPayload,
+  RegisterFormPayload,
   ContactFormPayload,
-  ContactFormResponse,
 } from "@/types/auth";
 
 export const registerAPI = async (
-  data: RegisterPayload
+  data: RegisterFormPayload
 ): Promise<AuthResponse> => {
   const response = await axiosInstance.post<AuthResponse>(
     "/auth/register",
@@ -20,36 +17,36 @@ export const registerAPI = async (
   return response.data;
 };
 
-export const loginAPI = async (data: LoginPayload): Promise<AuthResponse> => {
+export const loginAPI = async (
+  data: LoginFormPayload
+): Promise<AuthResponse> => {
   const response = await axiosInstance.post<AuthResponse>("/auth/login", data);
   return response.data;
 };
 
-export const logoutAPI = async (): Promise<LogoutResponse> => {
-  const response = await axiosInstance.post<LogoutResponse>("/auth/logout", {});
+export const logoutAPI = async (): Promise<AuthResponse> => {
+  const response = await axiosInstance.post<AuthResponse>("/auth/logout", {});
   return response.data;
 };
 
 export const contactAPI = async (
   data: ContactFormPayload
-): Promise<ContactFormResponse> => {
-  const response = await axiosInstance.post<ContactFormResponse>(
+): Promise<AuthResponse> => {
+  const response = await axiosInstance.post<AuthResponse>(
     "/auth/contact",
     data
   );
   return response.data;
 };
 
-axiosInstance.interceptors.response.use(
-  (res) => res,
-  (error) => {
-    // Customize error handling
-    console.error("API Error:", error.response?.data || error.message);
-    toast.error(
-      error.response?.data?.details ||
-        error.response?.data?.message ||
-        error.message
-    );
-    return Promise.reject(error);
-  }
-);
+export const getUserProfileAPI = async (): Promise<AuthResponse> => {
+  const response = await axiosInstance.post<AuthResponse>("/auth/profile");
+  return response.data;
+};
+
+export const getAccessTokenAPI = async (): Promise<AuthResponse> => {
+  const response = await axiosInstance.post<AuthResponse>("/auth/refresh", {
+    remember: localStorage.getItem("rememberme"),
+  });
+  return response.data;
+};

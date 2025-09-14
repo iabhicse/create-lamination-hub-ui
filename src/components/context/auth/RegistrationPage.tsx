@@ -1,21 +1,20 @@
 "use client";
 
 import { z } from "zod";
-import { toast } from "sonner";
 import { cn } from "@/libs/utils/utils-shadcn";
-import { registerAPI } from "@/libs/api/api.auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { registrationSchema } from "@/libs/configs/config.schema";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
+import { useSession } from "@/libs/store/useSession";
 import { Label } from "@/components/ui/shadcn/label";
 import { Input } from "@/components/ui/shadcn/input";
 import { Button } from "@/components/ui/shadcn/button";
 import { Checkbox } from "@/components/ui/shadcn/checkbox";
 import { PasswordInput } from "@/components/ui/custom/input";
 
-type RegistrationFormInputs = z.infer<typeof registrationSchema>;
+export type RegistrationFormInputs = z.infer<typeof registrationSchema>;
 
 interface RegistrationPageProps {
   onSwitch?: (index: number) => void;
@@ -38,23 +37,10 @@ const RegistrationPage = ({ onSwitch }: RegistrationPageProps) => {
     },
   });
 
-  const onSubmit: SubmitHandler<RegistrationFormInputs> = async (data) => {
-    try {
-      // Remove confirmPassword before sending to backend
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { confirmPassword, ...payload } = data;
-      const response = await registerAPI(payload);
+  const { signupUser } = useSession();
 
-      if (response?.status === "success") {
-        // Optionally redirect to login page and send a toaster message
-        onSwitch?.(0);
-        toast.success(response.message);
-      }
-    } catch (error: unknown) {
-      const errMsg =
-        error instanceof Error ? error.message : "Unexpected error occurred";
-      console.error("❌ API error:", errMsg);
-    }
+  const onSubmit: SubmitHandler<RegistrationFormInputs> = async (data) => {
+    signupUser(data);
   };
 
   return (

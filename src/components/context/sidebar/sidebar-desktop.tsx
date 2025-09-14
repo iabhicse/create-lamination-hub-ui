@@ -11,7 +11,7 @@ export function Sidebar_desktop() {
 
   return (
     <div
-      className={`screen-layout bg-background flex flex-col transition-all duration-300 ease-smooth ${
+      className={`content-height bg-background flex flex-col transition-all duration-300 ease-smooth ${
         isOpen ? "w-16" : "w-64"
       }`}
     >

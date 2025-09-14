@@ -1,8 +1,8 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { useAuthStore } from "@/libs/store/useAuthStore";
+import { useSession } from "@/libs/store/useSession";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
-import Image_avatar from "@/components/ui/images/Image_avatar";
+import ImageAvatar from "@/components/ui/images/Image_avatar";
 
 interface UserDropdownProps {
   isCollapsed: boolean;
@@ -11,7 +11,7 @@ interface UserDropdownProps {
 export function UserDropdown({ isCollapsed }: UserDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuthStore();
+  const { user } = useSession();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -48,7 +48,7 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
         `}
       >
         <div className="w-8 h-8 bg-primary/30 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer">
-          <Image_avatar src={user?.avatar} />
+          <ImageAvatar src={user?.avatar} />
         </div>
 
         {!isCollapsed && (

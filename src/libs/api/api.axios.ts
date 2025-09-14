@@ -1,38 +1,84 @@
-"server-only";
 import axios from "axios";
-import { envBackendConfig } from "../env/env.backend";
+import { toast } from "sonner";
 
-// Only used for logging/debugging in development
-const isDev = process.env.NODE_ENV === "development";
 const baseURL =
-  process.env.NEXT_PUBLIC_BACKEND_API_URL ||
-  envBackendConfig.APP_BACKEND_API_URL;
-// console.log(`Axios Base URL: ${baseURL}`);
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:7164/api";
 
-// Create Axios instance
-export const axiosInstance = axios.create({
-  baseURL: baseURL,
+const axiosInstance = axios.create({
+  baseURL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // Required for cookie/session auth
 });
 
-// Optional: Logging interceptor for development
-if (isDev) {
-  axiosInstance.interceptors.request.use((config) => {
-    console.log("[Axios Request]", config);
-    return config;
-  });
+let isRefreshing = false;
+let failedQueue: Array<(token?: string) => void> = [];
 
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      console.log("[Axios Response]", response);
-      return response;
-    },
-    (error) => {
-      console.error("[Axios Error]", error);
-      return Promise.reject(error);
+const processQueue = () => {
+  failedQueue.forEach((cb) => cb());
+  failedQueue = [];
+};
+
+axiosInstance.interceptors.response.use(
+  (res) => res,
+  async (err) => {
+    const originalRequest = err.config;
+
+    // Prevent retrying the refresh endpoint itself
+    const isRefreshCall = originalRequest.url?.includes("/auth/refresh", {
+      remember: localStorage.getItem("rememberme"),
+    });
+
+    if (
+      err.response?.status === 401 &&
+      !originalRequest._retry &&
+      !isRefreshCall
+    ) {
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          failedQueue.push(() => resolve(axiosInstance(originalRequest)));
+        });
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        // console.log("🔄 Attempting token refresh...");
+        await axiosInstance.post("/auth/refresh", {
+          remember: localStorage.getItem("rememberme"),
+        }); // Refresh token via cookie
+        processQueue();
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("❌ Refresh failed:", refreshError);
+        }
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
     }
+
+    return Promise.reject(err);
+  }
+);
+
+type AuthErrorResponse = {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+};
+
+export const handleErrorMessage = (error: unknown): string => {
+  const maybeResponse = error as AuthErrorResponse;
+  toast.error(
+    maybeResponse?.response?.data?.message ?? "Unexpected error occurred"
   );
-}
+  return maybeResponse?.response?.data?.message ?? "Unexpected error occurred";
+};
+
+export default axiosInstance;

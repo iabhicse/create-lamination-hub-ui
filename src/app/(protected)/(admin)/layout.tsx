@@ -1,32 +1,37 @@
-import React from "react";
-import { Sidebar_desktop } from "@/components/context/sidebar/sidebar-desktop";
-import { SidebarDesktopProvider } from "@/components/providers/SidebarDesktopProvider";
+"use client";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "@/libs/store/useSession";
 
-const sidebarItems = [
-  { id: "Profile", label: "My Profile", icon: "User", active: true },
-  { id: "Products", label: "Manage Products", icon: "Box" },
-  { id: "Orders", label: "Order Management", icon: "ShoppingCart" },
-  { id: "Customers", label: "Customer Insights", icon: "Brain" },
-  { id: "Analytics", label: "Sales Analytics", icon: "ChartLine" },
-  { id: "Promotions", label: "Discounts & Coupons", icon: "Tag" },
-  { id: "Reviews", label: "Product Reviews", icon: "Star" },
-  { id: "Support", label: "Support Tickets", icon: "MessageCircle" },
-  { id: "Settings", label: "Shop Settings", icon: "Settings" },
-];
+const AdminLayout = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated, user } = useSession();
+  const router = useRouter();
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="w-full">
-      <div className="flex justify-baseline items-start">
-        <SidebarDesktopProvider sidebarItems={sidebarItems}>
-          <Sidebar_desktop />
-          <main className="flex-1 overflow-y-auto screen-layout">
-            {children}
-          </main>
-        </SidebarDesktopProvider>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const timeout = setTimeout(() => {
+        router.push("/");
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isAuthenticated && user?.role !== "ADMIN") {
+      const timeout = setTimeout(() => {
+        router.push("/signin"); // You can create this page to show a proper message
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isAuthenticated, user, router]);
+
+  if (!isAuthenticated) {
+    return <div>Not authenticated. Redirecting to sign-in...</div>;
+  }
+
+  if (user?.role !== "ADMIN") {
+    return <div>Access denied. Redirecting...</div>;
+  }
+
+  return <>{children}</>;
 };
 
-export default DashboardLayout;
+export default AdminLayout;

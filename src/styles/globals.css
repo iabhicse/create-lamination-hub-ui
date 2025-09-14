@@ -261,6 +261,6 @@ input::placeholder {
   background: rgba(255, 255, 255, 0.3);
 }
 
-.screen-layout {
+.content-height {
   height: calc(100vh - 60px);
 }

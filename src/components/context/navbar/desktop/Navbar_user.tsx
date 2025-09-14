@@ -2,7 +2,7 @@
 import React from "react";
 import Logout from "../../auth/Logout";
 import Navbar_link from "../Navbar_link";
-import { useAuthStore } from "@/libs/store/useAuthStore";
+import { useSession } from "@/libs/store/useSession";
 import { Avatar, AvatarImage } from "@/components/ui/shadcn/avatar";
 
 const Navbar_user = () => {
@@ -10,7 +10,7 @@ const Navbar_user = () => {
     src: "/images/avatar/dummyAvatar.jpg",
     alt: "Avatar",
   };
-  const { user } = useAuthStore();
+  const { user } = useSession();
   return (
     <>
       <div className="group relative">

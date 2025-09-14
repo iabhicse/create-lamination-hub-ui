@@ -1,12 +1,8 @@
 "use client";
 import { z } from "zod";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { cn } from "@/libs/utils/utils-shadcn";
-import { loginAPI } from "@/libs/api/api.auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAuthStore } from "@/libs/store/useAuthStore";
 import { loginSchema } from "@/libs/configs/config.schema";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
@@ -15,8 +11,9 @@ import { Input } from "@/components/ui/shadcn/input";
 import { Button } from "@/components/ui/shadcn/button";
 import { Checkbox } from "@/components/ui/shadcn/checkbox";
 import { PasswordInput } from "@/components/ui/custom/input";
+import { useSession } from "@/libs/store/useSession";
 
-type LoginFormInputs = z.infer<typeof loginSchema>;
+export type LoginFormInputs = z.infer<typeof loginSchema>;
 
 interface LoginPageProps {
   onSwitch?: (index: number) => void;
@@ -37,24 +34,10 @@ const LoginPage = ({ onSwitch }: LoginPageProps) => {
     },
   });
 
-  const router = useRouter();
+  const { signinUser } = useSession();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    try {
-      const response = await loginAPI(data);
-      if (response?.status === "success") {
-        // Optionally redirect to login page and send a toaster message
-        if (response?.data) {
-          useAuthStore.getState().login(response?.data);
-          router.push("/");
-        }
-        toast.success(response.message);
-      }
-    } catch (error) {
-      const errMsg =
-        error instanceof Error ? error.message : "Unexpected error occurred";
-      console.error("❌ API error:", errMsg);
-    }
+    signinUser(data);
   };
 
   return (
