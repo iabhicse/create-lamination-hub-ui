@@ -1,8 +1,7 @@
 import axios from "axios";
 import { toast } from "sonner";
 
-const baseURL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:7164/api";
+const baseURL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:7164/api";
 
 const axiosInstance = axios.create({
   baseURL,
