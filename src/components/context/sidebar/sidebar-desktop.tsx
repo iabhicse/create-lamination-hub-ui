@@ -1,13 +1,17 @@
 "use client";
 import clsx from "clsx";
 import { UserDropdown } from "./user-dropdown";
-import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
+import { AdminDropdown } from "./admin-dropdown";
+import { useSession } from "@/libs/store/useSession";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
 import { useSidebarDesktop } from "@/components/providers/SidebarDesktopProvider";
 
 export function Sidebar_desktop() {
   const { isOpen, sidebarActiveList, activeItem, setActiveTab, setIsOpen } =
     useSidebarDesktop();
+
+  const { isAdmin } = useSession();
 
   return (
     <div
@@ -79,7 +83,11 @@ export function Sidebar_desktop() {
 
       {/* Static User Profile Section */}
       <div className="p-4 border-t border-border">
-        <UserDropdown isCollapsed={isOpen} />
+        {isAdmin() ? (
+          <AdminDropdown isCollapsed={isOpen} />
+        ) : (
+          <UserDropdown isCollapsed={isOpen} />
+        )}
       </div>
     </div>
   );

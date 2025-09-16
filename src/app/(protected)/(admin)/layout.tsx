@@ -13,7 +13,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     }
 
     if (isAuthenticated && user?.role !== "ADMIN") {
-      router.push("/signin"); // You can create this page to show a proper message
+      router.push("/"); // You can create this page to show a proper message
     }
   }, [isAuthenticated, user, router]);
 

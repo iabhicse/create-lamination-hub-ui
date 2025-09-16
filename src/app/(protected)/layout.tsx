@@ -27,7 +27,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
     // This effect manages the countdown timer itself.
     if (countdown === 0) {
       if (!isAuthenticated) {
-        router.push("/signin");
+        router.push("/");
       }
       return;
     }

@@ -1,15 +1,15 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { useSession } from "@/libs/store/useSession";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
 import ImageAvatar from "@/components/ui/images/Image_avatar";
-import { useRouter } from "next/navigation";
 
-interface UserDropdownProps {
+interface AdminDropdownProps {
   isCollapsed: boolean;
 }
 
-export function UserDropdown({ isCollapsed }: UserDropdownProps) {
+export function AdminDropdown({ isCollapsed }: AdminDropdownProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const { user, signoutUser } = useSession();
@@ -31,9 +31,9 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
   }, []);
 
   const userMenuItems = [
-    { id: "profile", label: "Profile", href: "/profile", icon: "User" },
+    { id: "dashboard", label: "Dashboard", href: "/dashboard", icon: "User" },
     { id: "billing", label: "Billing", href: "/billing", icon: "CreditCard" },
-    { id: "help", label: "Help", href: "/help", icon: "Info" },
+    { id: "settings", label: "Settings", href: "/settings", icon: "Settings" },
     { id: "logout", label: "Sign out", icon: "LogOut", danger: true },
   ];
 
@@ -117,7 +117,7 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
                       router.push(item.href?.toString() || "/");
                     }
                     // Handle menu item click
-                    console.log(`Clicked: ${item.label}`);
+                    // console.log(`Clicked: ${item.label}`);
                   }}
                   className={`
                     w-full hover:bg-primary/30 flex items-center space-x-3 px-3 py-2 text-left cursor-pointer

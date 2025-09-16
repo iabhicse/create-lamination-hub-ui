@@ -1,4 +1,6 @@
 import React from "react";
+import { LayoutProvider } from "./context";
+import Profile_Header from "@/components/context/profile/Profile_Header";
 import { Sidebar_desktop } from "@/components/context/sidebar/sidebar-desktop";
 import { SidebarDesktopProvider } from "@/components/providers/SidebarDesktopProvider";
 
@@ -19,10 +21,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="w-full">
       <div className="flex justify-baseline items-start">
         <SidebarDesktopProvider sidebarItems={sidebarItems}>
-          <Sidebar_desktop />
-          <main className="flex-1 overflow-y-auto content-height">
-            {children}
-          </main>
+          <LayoutProvider>
+            <Sidebar_desktop />
+            <main className="flex-1 overflow-y-auto content-height">
+              <Profile_Header />
+              {children}
+            </main>
+          </LayoutProvider>
         </SidebarDesktopProvider>
       </div>
     </div>

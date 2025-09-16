@@ -62,3 +62,21 @@ export interface SidebarItem {
   icon: string;
   active?: boolean;
 }
+
+export type InputType =
+  | "text"
+  | "textarea"
+  | "email"
+  | "password"
+  | "number"
+  | "decimal"
+  | "date"
+  | "tel"
+  | "url"
+  | "select"
+  | "multiselect"
+  | "radio"
+  | "checkbox"
+  | "file"
+  | "range"
+  | "color";

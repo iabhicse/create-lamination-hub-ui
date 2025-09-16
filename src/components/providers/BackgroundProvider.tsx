@@ -29,7 +29,7 @@ const BackgroundProvider = ({
     case "gradient":
       return (
         <div
-          className={clsx("min-h-screen w-full", className)}
+          className={clsx(" w-full", className)}
           style={{ backgroundImage: cssGradient }}
         >
           {children}
