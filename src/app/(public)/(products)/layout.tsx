@@ -1,7 +1,7 @@
 import React from "react";
 
-const ProductsLayout = () => {
-  return <></>;
+const ProductsLayout = ({ children }: { children: React.ReactNode }) => {
+  return <>{children}</>;
 };
 
 export default ProductsLayout;
