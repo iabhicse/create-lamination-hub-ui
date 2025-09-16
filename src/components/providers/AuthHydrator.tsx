@@ -6,12 +6,17 @@ export const AuthHydrator = () => {
   const { getUserProfile } = useSession();
 
   useEffect(() => {
-    if (!hasFetchedRef.current) {
-      hasFetchedRef.current = true;
-      getUserProfile();
-    }
+    if (hasFetchedRef.current) return;
+    hasFetchedRef.current = true;
+
+    // Ensure profile fetch completes before allowing re-entry
+    getUserProfile().catch((err) => {
+      if (process.env.NODE_ENV === "development") {
+        console.error("AuthHydrator fetch failed:", err);
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return null; // Just a silent sync component
+  return null;
 };

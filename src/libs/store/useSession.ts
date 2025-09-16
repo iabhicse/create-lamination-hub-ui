@@ -17,6 +17,7 @@ interface AuthState {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  hasFetchedProfile: boolean;
 
   // Actions
   signinUser: (data: LoginFormInputs) => Promise<void>;
@@ -31,6 +32,7 @@ export const useSession = create<AuthState>((set, get) => ({
   user: null,
   isLoading: false,
   isAuthenticated: false,
+  hasFetchedProfile: false,
 
   signinUser: async (data) => {
     set({ isLoading: true });
@@ -96,7 +98,13 @@ export const useSession = create<AuthState>((set, get) => ({
   },
 
   getUserProfile: async () => {
+    const { user, isAuthenticated, hasFetchedProfile } = get();
+
+    // ✅ Avoid duplicate calls if already fetched
+    if (hasFetchedProfile || (isAuthenticated && user)) return;
+
     set({ isLoading: true });
+
     try {
       const response = await getUserProfileAPI();
       if (!response?.success || !response?.data) {
@@ -106,10 +114,13 @@ export const useSession = create<AuthState>((set, get) => ({
       set({
         user: response.data,
         isAuthenticated: true,
+        hasFetchedProfile: true, // ✅ Mark as fetched
       });
     } catch (error) {
-      handleErrorMessage(error);
-      set({ user: null, isAuthenticated: false });
+      if (process.env.NODE_ENV === "development") {
+        console.error("getUserProfile error:", error);
+      }
+      set({ user: null, isAuthenticated: false, hasFetchedProfile: false });
     } finally {
       set({ isLoading: false });
     }

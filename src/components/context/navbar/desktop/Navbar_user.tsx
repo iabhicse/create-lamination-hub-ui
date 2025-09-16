@@ -28,7 +28,11 @@ const Navbar_user = () => {
             {user?.role === "ADMIN" ? (
               <Navbar_link
                 key={"Dashboard"}
-                link={{ id: "Dashboard", label: "Dashboard", href: "/admin" }}
+                link={{
+                  id: "Dashboard",
+                  label: "Dashboard",
+                  href: "/dashboard",
+                }}
               />
             ) : (
               <Navbar_link
