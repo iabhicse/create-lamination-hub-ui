@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { useSession } from "@/libs/store/useSession";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
 import ImageAvatar from "@/components/ui/images/Image_avatar";
+import { useSession } from "@/components/providers/AuthProvider";
 
 interface AdminDropdownProps {
   isCollapsed: boolean;

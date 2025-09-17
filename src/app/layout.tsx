@@ -4,6 +4,7 @@ import LayoutProvider from "@/components/providers/LayoutProvider";
 
 import { Metadata } from "next";
 import HomePageSEO from "@/libs/seo/seo.homepage";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 export const metadata: Metadata = HomePageSEO;
 
 export default function RootLayout({
@@ -16,7 +17,9 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${poppins.variable} antialiased relative scroll-smooth`}
       >
-        <LayoutProvider>{children}</LayoutProvider>
+        <AuthProvider>
+          <LayoutProvider>{children}</LayoutProvider>
+        </AuthProvider>
       </body>
     </html>
   );

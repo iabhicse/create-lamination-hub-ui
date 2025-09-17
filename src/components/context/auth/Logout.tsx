@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { useSession } from "@/libs/store/useSession";
 import Button_centerUnderline from "@/components/ui/buttons/Button_centerUnderline";
+import { useSession } from "@/components/providers/AuthProvider";
 
 const Logout = () => {
   const { signoutUser } = useSession();

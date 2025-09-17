@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { useSession } from "@/libs/store/useSession";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
 import Image_avatar from "@/components/ui/images/Image_avatar";
 import BackgroundProvider from "@/components/providers/BackgroundProvider";
 import { ProfileBackgroundShape } from "@/components/ui/styled-components/styled-shapes";
+import { useSession } from "@/components/providers/AuthProvider";
 
 const Icons = [
   { id: "1", icon: "User" },

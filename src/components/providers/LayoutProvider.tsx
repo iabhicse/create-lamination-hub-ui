@@ -5,11 +5,11 @@ import Footer from "../layouts/Footer";
 import FontsProvider from "./FontsProvider";
 import { Toaster } from "../ui/shadcn/sonner";
 import ThemesProvider from "./ThemesProvider";
-import { AuthHydrator } from "./AuthHydrator";
-import { useSession } from "@/libs/store/useSession";
+// import { AuthHydrator } from "./AuthHydrator";
 import { useScrollStatus } from "@/libs/hooks/use-scroll";
 import { HamburgerMenuProvider } from "./HamburgerProvider";
 import { useBreakpoint } from "@/libs/hooks/use-breakpoints";
+import { useSession } from "./AuthProvider";
 
 const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
@@ -42,7 +42,7 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
           </main>
           <Toaster />
           <Footer />
-          <AuthHydrator />
+          {/* <AuthHydrator /> */}
         </FontsProvider>
       </ThemesProvider>
     </>

@@ -3,11 +3,11 @@ import React, { useMemo, useState } from "react";
 import { SchemaKey } from "./forms/dashboard.main";
 import ProfileForm from "@/libs/forms/form.profile";
 import { Description } from "@radix-ui/react-dialog";
-import { useSession } from "@/libs/store/useSession";
 import Profile_info from "../profile/info/Profile_info";
 import { Dialog, DialogTitle } from "@/components/ui/shadcn/dialog";
 import { DialogContentUserProfile } from "@/components/ui/custom/dialog";
 import Dashboard_forms from "./Dashboard_forms";
+import { useSession } from "@/components/providers/AuthProvider";
 
 const Dashboard_user = () => {
   const { user } = useSession();

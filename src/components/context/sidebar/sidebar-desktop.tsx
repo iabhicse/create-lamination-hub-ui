@@ -2,16 +2,19 @@
 import clsx from "clsx";
 import { UserDropdown } from "./user-dropdown";
 import { AdminDropdown } from "./admin-dropdown";
-import { useSession } from "@/libs/store/useSession";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
+import { useSession } from "@/components/providers/AuthProvider";
 import { useSidebarDesktop } from "@/components/providers/SidebarDesktopProvider";
 
 export function Sidebar_desktop() {
   const { isOpen, sidebarActiveList, activeItem, setActiveTab, setIsOpen } =
     useSidebarDesktop();
 
-  const { isAdmin } = useSession();
+  const { user } = useSession();
+  const isAdmin = () => {
+    return user?.role === "ADMIN";
+  };
 
   return (
     <div

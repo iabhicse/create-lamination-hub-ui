@@ -2,8 +2,8 @@
 import React from "react";
 import Logout from "../../auth/Logout";
 import Navbar_link from "../Navbar_link";
-import { useSession } from "@/libs/store/useSession";
 import { Avatar, AvatarImage } from "@/components/ui/shadcn/avatar";
+import { useSession } from "@/components/providers/AuthProvider";
 
 const Navbar_user = () => {
   const dummyAvatar = {

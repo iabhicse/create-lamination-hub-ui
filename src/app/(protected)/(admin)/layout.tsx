@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "@/libs/store/useSession";
+import { useSession } from "@/components/providers/AuthProvider";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, user } = useSession();

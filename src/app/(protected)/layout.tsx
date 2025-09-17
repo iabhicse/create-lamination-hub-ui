@@ -1,7 +1,7 @@
 "use client";
+import { useSession } from "@/components/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useSession } from "@/libs/store/useSession";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();

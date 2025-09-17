@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/shadcn/input";
 import { Button } from "@/components/ui/shadcn/button";
 import { Checkbox } from "@/components/ui/shadcn/checkbox";
 import { PasswordInput } from "@/components/ui/custom/input";
-import { useSession } from "@/libs/store/useSession";
+import { useSession } from "@/components/providers/AuthProvider";
 
 export type LoginFormInputs = z.infer<typeof loginSchema>;
 

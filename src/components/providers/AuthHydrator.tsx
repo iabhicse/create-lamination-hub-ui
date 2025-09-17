@@ -1,5 +1,6 @@
+"use client";
 import { useEffect, useRef } from "react";
-import { useSession } from "@/libs/store/useSession";
+import { useSession } from "./AuthProvider";
 
 export const AuthHydrator = () => {
   const hasFetchedRef = useRef(false);

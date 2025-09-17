@@ -7,7 +7,7 @@ import ProfileForm from "@/libs/forms/form.profile";
 import { Description } from "@radix-ui/react-dialog";
 import { Dialog, DialogTitle } from "@/components/ui/shadcn/dialog";
 import { DialogContentUserProfile } from "@/components/ui/custom/dialog";
-import { useSession } from "@/libs/store/useSession";
+import { useSession } from "@/components/providers/AuthProvider";
 
 const Profile_User = () => {
   const { user } = useSession();
